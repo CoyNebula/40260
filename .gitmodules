@@ -1,0 +1,6 @@
+[submodule "40260"]
+	path = 40260
+	url = https://github.com/CoyNebula/40260.git
+[submodule "FEI"]
+	path = FEI
+	url = https://github.com/CoyNebula/FEI.git
