@@ -4,3 +4,6 @@
 [submodule "FEI"]
 	path = FEI
 	url = https://github.com/CoyNebula/FEI.git
+[submodule "Poema"]
+	path = Poema
+	url = https://github.com/CoyNebula/Poema.git
