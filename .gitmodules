@@ -7,3 +7,6 @@
 [submodule "Poema"]
 	path = Poema
 	url = https://github.com/CoyNebula/Poema.git
+[submodule "ecomerce"]
+	path = ecomerce
+	url = https://github.com/CoyNebula/ecomerce.git
