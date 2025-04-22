@@ -106,7 +106,7 @@ function myFunction(cd) {
 
 </body>
 </html>
-[11:32 a.m., 21/4/2025] +52 1 228 362 9896: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -200,7 +200,7 @@ function myFunction(cd) {
                 fetch('alumnos.xml')
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error(Error de red: ${response.status});
+                            throw new Error(`Error de red: ${response.status}`);
                         }
                         return response.text();
                     })
@@ -209,7 +209,7 @@ function myFunction(cd) {
                         displayAlumnos(data);
                     })
                     .catch(error => {
-                        errorContainer.textContent = Error al cargar los datos: ${error.message};
+                        errorContainer.textContent = `Error al cargar los datos: ${error.message}`;
                         console.error('Error:', error);
                     })
                     .finally(() => {
