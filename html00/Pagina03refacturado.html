@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina 03 Refactorizada</title>
+</head>
+<body>
+
+    <button id="btn">Ejecutar función</button>
+    <table id="demo"></table>
+
+    <script type="module">
+        import { loadXMLDoc } from './Pagina03.js';
+
+        document.getElementById('btn').addEventListener('click', loadXMLDoc);
+    </script>
+
+</body>
+</html>

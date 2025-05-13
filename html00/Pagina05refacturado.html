@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Random Picture</title>
+  <style>
+    img {
+      box-shadow: 10px 10px 10px rgb(144, 196, 234);
+    }
+    figure {
+      text-align: center;
+      width: 300px;
+      display: inline-block;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Picture</h1>
+  <div id="demo"></div>
+
+  <script>
+    const demo = document.getElementById("demo");
+
+    const Picture = (id, name) => `
+      <figure>
+        <img src="https://picsum.photos/id/${id}/200/200" alt="${name}">
+        <figcaption>${name}</figcaption>
+      </figure>
+    `;
+
+    demo.innerHTML = Picture(1, "John") + Picture(2, "Jane");
+  </script>
+</body>
+</html>

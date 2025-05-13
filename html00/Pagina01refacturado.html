@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listado de Alumnos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .loading {
+      display: none;
+      margin-left: 10px;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    .no-data {
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Listado de Alumnos</h1>
+  <button id="loadButton">Cargar Datos</button>
+  <span id="loading" class="loading">Cargando...</span>
+  <div id="error" class="error"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Correo</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loadButton = document.getElementById('loadButton');
+      const loadingIndicator = document.getElementById('loading');
+      const errorContainer = document.getElementById('error');
+      const tableBody = document.getElementById('tableBody');
+
+      loadButton.addEventListener('click', fetchAlumnos);
+
+      function fetchAlumnos() {
+        loadingIndicator.style.display = 'inline';
+        errorContainer.textContent = '';
+        tableBody.innerHTML = '';
+
+        fetch('alumnos.xml')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Error de red: ${response.status}`);
+            }
+            return response.text();
+          })
+          .then(str => new DOMParser().parseFromString(str, 'text/xml'))
+          .then(xmlDoc => {
+            mostrarAlumnos(xmlDoc);
+          })
+          .catch(error => {
+            errorContainer.textContent = `Error al cargar los datos: ${error.message}`;
+            console.error(error);
+          })
+          .finally(() => {
+            loadingIndicator.style.display = 'none';
+          });
+      }
+
+      function mostrarAlumnos(xml) {
+        const alumnos = xml.getElementsByTagName('alumno');
+
+        if (alumnos.length === 0) {
+          errorContainer.textContent = 'No se encontraron datos de alumnos.';
+          return;
+        }
+
+        let contenido = '';
+
+        for (let i = 0; i < alumnos.length; i++) {
+          const alumno = alumnos[i];
+          const nombre = getText(alumno, 'nombre');
+          const nacimiento = formatDate(getText(alumno, 'nacimiento'));
+          const correo = alumno.getAttribute('correo') || '<span class="no-data">No disponible</span>';
+
+          contenido += `
+            <tr>
+              <td>${nombre}</td>
+              <td>${nacimiento}</td>
+              <td>${correo}</td>
+            </tr>
+          `;
+        }
+
+        tableBody.innerHTML = contenido;
+      }
+
+      function getText(parent, tagName) {
+        const tag = parent.getElementsByTagName(tagName)[0];
+        return tag && tag.textContent ? tag.textContent : '';
+      }
+
+      function formatDate(fecha) {
+        if (!fecha) return '';
+        const date = new Date(fecha);
+        if (isNaN(date)) return fecha;
+        return date.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+      }
+    });
+  </script>
+</body>
+</html>

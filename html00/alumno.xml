@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alumnos>
+  <alumno correo="juan.perez@example.com">
+    <nombre>Juan Pérez</nombre>
+    <nacimiento>1999-05-12</nacimiento>
+  </alumno>
+  <alumno correo="maria.lopez@example.com">
+    <nombre>María López</nombre>
+    <nacimiento>2000-09-23</nacimiento>
+  </alumno>
+  <alumno>
+    <nombre>Carlos Díaz</nombre>
+    <nacimiento>2001-01-30</nacimiento>
+  </alumno>
+</alumnos>

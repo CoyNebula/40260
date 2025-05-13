@@ -191,12 +191,10 @@ function myFunction(cd) {
             loadButton.addEventListener('click', fetchAlumnos);
             
             function fetchAlumnos() {
-                // Mostrar indicador de carga
                 loadingIndicator.style.display = 'inline';
                 errorContainer.textContent = '';
                 tableBody.innerHTML = '';
                 
-                // Usar Fetch API en lugar de XMLHttpRequest
                 fetch('alumnos.xml')
                     .then(response => {
                         if (!response.ok) {
@@ -232,7 +230,6 @@ function myFunction(cd) {
                     const nombre = getElementTextContent(alumnoElement, "nombre");
                     const nacimiento = getElementTextContent(alumnoElement, "nacimiento");
                     
-                    // Obtener el atributo correo si existe
                     const correo = alumnoElement.getAttribute("correo") || "";
                     
                     tableContent += `
@@ -247,7 +244,6 @@ function myFunction(cd) {
                 tableBody.innerHTML = tableContent;
             }
             
-            // Función auxiliar para obtener contenido de texto de elementos XML
             function getElementTextContent(parent, tagName) {
                 const elements = parent.getElementsByTagName(tagName);
                 if (elements.length > 0 && elements[0].firstChild) {
@@ -256,7 +252,6 @@ function myFunction(cd) {
                 return "";
             }
             
-            // Función para formatear fechas (asumiendo formato ISO YYYY-MM-DD)
             function formatDate(dateStr) {
                 if (!dateStr) return "";
                 

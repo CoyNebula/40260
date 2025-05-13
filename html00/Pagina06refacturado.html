@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <style>
+    img {
+      box-shadow: 10px 10px 20px red;
+      border-radius: 100%;
+      cursor: pointer;
+      transition: border-radius 0.3s ease;
+    }
+
+    img.redonda {
+      border-radius: 10% 40% 30% 70%;
+    }
+
+    figure {
+      display: inline-block;
+      text-align: center;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const Picture = (id, nombre) => {
+      const url = `https://picsum.photos/id/${id}/200/200`;
+      return `
+        <figure>
+          <img src="${url}" alt="${nombre}" class="redonda">
+          <figcaption>${nombre}</figcaption>
+        </figure>
+      `;
+    };
+
+    const app = document.getElementById("app");
+    app.innerHTML = 
+      Picture(1, "John") + 
+      Picture(2, "Jane") + 
+      Picture(3, "Mary");
+
+    const imagenes = app.querySelectorAll("img");
+    imagenes.forEach(img => {
+      img.addEventListener("click", () => {
+        img.classList.toggle("redonda");
+      });
+    });
+  </script>
+</body>
+</html>
