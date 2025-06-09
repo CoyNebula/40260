@@ -10,3 +10,6 @@
 [submodule "ecomerce"]
 	path = ecomerce
 	url = https://github.com/CoyNebula/ecomerce.git
+[submodule "ordinario-FTW"]
+	path = ordinario-FTW
+	url = https://github.com/CoyNebula/ordinario-FTW.git
